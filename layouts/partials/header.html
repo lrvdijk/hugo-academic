@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme" content="hugo-academic">
   {{ .Hugo.Generator }}
-  {{ with .Site.Params.name }}<meta name="author" content="{{ . }}">{{ end }}
+  {{ with .Site.Params.name }}<meta name="author" content="{{ . | plainify }}">{{ end }}
   {{ with .Site.Params.role }}<meta name="description" content="{{ . }}">{{ end }}
 
   {{ range .Translations }}
@@ -119,7 +119,7 @@
 
   {{ partial "head_custom" . }}
 
-  <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+  <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title | plainify }}</title>
 
 </head>
-<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71" {{ if not ($scr.Get "light") }}class="dark"{{ end }}>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="151" {{ if not ($scr.Get "light") }}class="dark"{{ end }}>
