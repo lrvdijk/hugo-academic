@@ -23,14 +23,13 @@
         // Escape colons from IDs, such as those found in Markdown footnote links.
         target = target.replace(/:/g, '\\:');
 
-        var pos = $(target).offset().top - navbar_offset
-        console.log(target);
-        if(target == "#top") {
-            pos = 0;
-        }
-
         // If target element exists, scroll to it taking into account fixed navigation bar offset.
         if($(target).length) {
+            var pos = $(target).offset().top - navbar_offset
+            if(target == "#top") {
+                pos = 0;
+            }
+
             $('body').addClass('scrolling');
             $('html, body').animate({
                 scrollTop: pos
