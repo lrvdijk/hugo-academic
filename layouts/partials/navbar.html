@@ -15,9 +15,9 @@
                 {{ end }}
                 <a class="navbar-brand" href="{{ "/" | relLangURL }}">
                     {{- if .Site.Params.logo -}}
-                    <img src="{{ printf "/img/%s" .Site.Params.logo | relURL }}" alt="{{ .Site.Title }}">
+                    <img src="{{ printf "/img/%s" .Site.Params.logo | relURL }}" alt="{{ .Site.Title | plainify }}">
                     {{- else -}}
-                    {{- .Site.Title -}}
+                    {{- .Site.Title | safeHTML -}}
                     {{- end -}}
                 </a>
             </div>
