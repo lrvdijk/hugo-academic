@@ -512,8 +512,10 @@ article {
 }
 
 .article-category {
+    display: block;
     font-size: 1.25rem;
     text-transform: uppercase;
+    letter-spacing: 0.7rem;
     color: #aaa;
     font-family: {{ .Get "heading-font" }}, sans-serif;
 }
