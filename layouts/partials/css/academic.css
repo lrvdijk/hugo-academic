@@ -1228,6 +1228,7 @@ nav#navbar-main li {
 
     .navbar-toggle {
         display: block;
+        margin-right: 0px;
     }
 
     .navbar-fixed-top {
@@ -1238,6 +1239,7 @@ nav#navbar-main li {
     .navbar-collapse {
         padding: 0px !important;
         border: none !important;
+        box-shadow: none !important;
     }
 
     .navbar-collapse.collapse {
