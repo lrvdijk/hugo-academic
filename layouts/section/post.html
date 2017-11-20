@@ -4,21 +4,50 @@
 {{ partial "header_image.html" . }}
 
 <div class="universal-wrapper">
+    <h1>{{ .Title | default (i18n "posts") }}</h1>
 
-  <h1>{{ .Title | default (i18n "posts") }}</h1>
+    <div class="row">
+        <div class="hiddem-sm col-md-3">
+            <h2>{{ i18n "Tags" }}</h2>
+            {{ if not (eq (len $.Site.Taxonomies.tags) 0) }}
 
-  {{ with .Content }}
-  <div class="article-style" itemprop="articleBody">{{ . }}</div>
-  {{ end }}
+            {{ $fontSmall := 0.8 }}
+            {{ $fontBig := 2.5 }}
 
-  {{ $paginator := .Paginate .Data.Pages }}
-  {{ range $paginator.Pages }}
-    {{ $params := dict "post" . }}
-    {{ partial "post_li" $params }}
-  {{ end }}
+            {{ $fontDelta := sub $fontBig $fontSmall }}
+            {{ $min := len (index $.Site.Taxonomies.tags.ByCount.Reverse 0).Pages }}
+            {{ $max := add (len (index $.Site.Taxonomies.tags.ByCount 0).Pages) 1 }}
+            {{ $delta := sub $max $min }}
+            {{ $fontStep := div $fontDelta $delta }}
 
-  {{ partial "pagination" . }}
+            <div id="tag-cloud">
+                {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
+                    {{ $tagCount := len $taxonomy.Pages }}
+                    {{ $weight := div (sub (math.Log $tagCount) (math.Log $min)) (sub (math.Log $max) (math.Log $min)) }}
+                    {{ $fontSize := add $fontSmall (mul (sub $fontBig $fontSmall) $weight) }}
+                    {{ $urlPart1 := relLangURL "/tags/" }}
+                    {{ $urlPart2 := urlize $name  }}
+                    <a href="{{ delimit (slice $urlPart1 $urlPart2) "" }}" style="font-size:{{ $fontSize }}rem">{{ $name }}</a>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
 
+        <div class="col-md-9 col-sm-12">
+            {{ with .Content }}
+            <div class="article-style" itemprop="articleBody">{{ . | markdownify }}</div>
+            {{ end }}
+
+            {{ $paginator := .Paginate .Data.Pages }}
+            {{ range $paginator.Pages }}
+                {{ $params := dict "post" . }}
+                {{ partial "post_li" $params }}
+            {{ end }}
+
+            {{ partial "pagination" . }}
+        </div>
+    </div>
 </div>
+
 {{ partial "footer_container.html" . }}
 {{ partial "footer.html" . }}
