@@ -7,8 +7,22 @@
     <h1>{{ .Title | default (i18n "posts") }}</h1>
 
     <div class="row">
+        <div class="col-md-9 col-sm-12">
+            {{ with .Content }}
+            <div class="article-style" itemprop="articleBody">{{ . | markdownify }}</div>
+            {{ end }}
+
+            {{ $paginator := .Paginate .Data.Pages }}
+            {{ range $paginator.Pages }}
+                {{ $params := dict "post" . }}
+                {{ partial "post_li" $params }}
+            {{ end }}
+
+            {{ partial "pagination" . }}
+        </div>
+
         <div class="hiddem-sm col-md-3">
-            <h2>{{ i18n "Tags" }}</h2>
+            <h2>Tags</h2>
             {{ if not (eq (len $.Site.Taxonomies.tags) 0) }}
 
             {{ $fontSmall := 0.8 }}
@@ -31,20 +45,6 @@
                 {{ end }}
             </div>
             {{ end }}
-        </div>
-
-        <div class="col-md-9 col-sm-12">
-            {{ with .Content }}
-            <div class="article-style" itemprop="articleBody">{{ . | markdownify }}</div>
-            {{ end }}
-
-            {{ $paginator := .Paginate .Data.Pages }}
-            {{ range $paginator.Pages }}
-                {{ $params := dict "post" . }}
-                {{ partial "post_li" $params }}
-            {{ end }}
-
-            {{ partial "pagination" . }}
         </div>
     </div>
 </div>
