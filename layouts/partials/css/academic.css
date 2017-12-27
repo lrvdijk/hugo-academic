@@ -964,6 +964,7 @@ footer a#back_to_top i {
     height: 150px;
     padding: 15px;
     transition: height 0.5s ease;
+    border: none !important;
 }
 
 .navbar-default {
@@ -971,7 +972,7 @@ footer a#back_to_top i {
     /** Pattern by subtle patterns */
     background-image: url('../img/background.png');
 
-    box-shadow: 0 0.125rem 0.25rem 0 rgba(0,0,0,.11)
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(0,0,0,.11);
     border: none !important;
 }
 
