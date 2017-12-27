@@ -972,6 +972,7 @@ footer a#back_to_top i {
     background-image: url('../img/background.png');
 
     box-shadow: 0 0.125rem 0.25rem 0 rgba(0,0,0,.11)
+    border: none !important;
 }
 
 .navbar-default .navbar-toggle {
