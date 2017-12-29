@@ -22,10 +22,18 @@ math = false
 # Does the project detail page use source code highlighting?
 highlight = true
 
+license = ""
+license_url = ""
+
 # Featured image
 # Place your image in the `static/img/` folder and reference its filename below, e.g. `image = "example.jpg"`.
 [header]
 image = ""
 caption = ""
+
+# Github
+[github]
+url = ""
+travis = false
 
 +++
