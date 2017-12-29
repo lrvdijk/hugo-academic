@@ -407,9 +407,6 @@ ul.ul-edu li .description p.institution {
  *  Sharing
  **************************************************/
 
-.share-box {
-    float: right;
-}
 
 ul.share {
     display: flex;
