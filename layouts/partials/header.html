@@ -102,8 +102,8 @@
   {{ end }}
 
   {{ if or .Site.RSSLink .RSSLink }}
-  <link rel="alternate" href="{{ .RSSLink | default .Site.RSSLink  }}" type="application/rss+xml" title="{{ .Site.Title }}">
-  <link rel="feed" href="{{ .RSSLink | default .Site.RSSLink }}" type="application/rss+xml" title="{{ .Site.Title }}">
+  <link rel="alternate" href="{{ .RSSLink | default .Site.RSSLink  }}" type="application/rss+xml" title="{{ .Site.Title | plainify }}">
+  <link rel="feed" href="{{ .RSSLink | default .Site.RSSLink }}" type="application/rss+xml" title="{{ .Site.Title | plainify }}">
   {{ end }}
 
   <link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
