@@ -85,6 +85,10 @@
 
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
+  {{ range .Params.custom_js }}
+  <script type="text/javascript" src="{{ "/js" | relURL }}{{ . }}"></script>
+  {{ end }}
+
   {{ if or .Site.RSSLink .RSSLink }}
   <link rel="alternate" href="{{ .RSSLink | default .Site.RSSLink  }}" type="application/rss+xml" title="{{ .Site.Title }}">
   <link rel="feed" href="{{ .RSSLink | default .Site.RSSLink }}" type="application/rss+xml" title="{{ .Site.Title }}">
