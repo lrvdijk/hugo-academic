@@ -59,7 +59,11 @@
   {{ end }}
   <link rel="stylesheet" href="{{ "styles.css" | relURL }}">
   {{ range .Site.Params.custom_css }}
+  {{ if eq (substr . 0 2) "//" }}
+  <link rel="stylesheet" href="{{ . }}">
+  {{ else }}
   <link rel="stylesheet" href="{{ "/css/" | relURL }}{{ . }}">
+  {{ end }}
   {{ end }}
 
   {{ range .Params.custom_css }}
@@ -86,7 +90,11 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
   {{ range .Params.custom_js }}
-  <script type="text/javascript" src="{{ "/js" | relURL }}{{ . }}"></script>
+  {{ if eq (substr . 0 2) "//" }}
+  <script type="text/javascript" src="{{ . }}"></script>
+  {{ else }}
+  <script type="text/javascript" src="{{ "/js/" | relURL }}{{ . }}"></script>
+  {{ end }}
   {{ end }}
 
   {{ if or .Site.RSSLink .RSSLink }}
@@ -105,9 +113,9 @@
   <meta property="twitter:site" content="@{{ replaceRE "^//twitter.com/([^/]+)" "$1" .link }}">
   <meta property="twitter:creator" content="@{{ replaceRE "^//twitter.com/([^/]+)" "$1" .link  }}">
   {{ end }}
-  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta property="og:site_name" content="{{ .Site.Title | plainify }}">
   <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:title" content="{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}">
+  <meta property="og:title" content="{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title | plainify }}">
   <meta property="og:description" content="{{- if .IsPage -}}
   {{- if or .Type "publication" .Type "talk" -}}
     {{- with .Params.abstract -}}{{- . -}}{{- end -}}
