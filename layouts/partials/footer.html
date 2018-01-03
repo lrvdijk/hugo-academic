@@ -35,6 +35,14 @@
     <script src="{{ "/js/" | relURL }}{{ . }}"></script>
     {{ end }}
 
+    {{ range .Params.custom_js }}
+    {{ if eq (substr . 0 2) "//" }}
+    <script type="text/javascript" src="{{ . }}"></script>
+    {{ else }}
+    <script type="text/javascript" src="{{ "/js/" | relURL }}{{ . }}"></script>
+    {{ end }}
+    {{ end }}
+
     <!-- Code highlighting -->
     {{ if $.Scratch.Get "highlight_enabled" }}
       {{ $v := $js.highlight.version }}
