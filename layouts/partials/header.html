@@ -67,7 +67,11 @@
   {{ end }}
 
   {{ range .Params.custom_css }}
+  {{ if eq (substr . 0 2) "//" }}
+  <link rel="stylesheet" href="{{ . }}">
+  {{ else }}
   <link rel="stylesheet" href="{{ "/css/" | relURL }}{{ . }}">
+  {{ end }}
   {{ end }}
 
   {{ if .Site.GoogleAnalytics }}
